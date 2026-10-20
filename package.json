@@ -1,0 +1,31 @@
+{
+  "name": "pankosmia-usfm",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./index.js",
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": ">=24",
+    "pnpm": "11.20.0"
+  },
+  "files": [
+    "src",
+    "index.js",
+    "package.json",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node tests/run-tests.js"
+  },
+  "exports": {
+    "utils": "./utils/index.js",
+    "parse": "./parse/index.js",
+    "serialize": "./serialize/index.js"
+  },
+  "dependencies": {
+    "proskomma-core": "^0.11.3"
+  },
+  "devDependencies": {
+    "tape": "^5.10.1"
+  }
+}
