@@ -23,6 +23,7 @@
     "serialize": "./serialize/index.js"
   },
   "dependencies": {
+    "fs-extra": "^11.4.1",
     "proskomma-core": "^0.11.3"
   },
   "devDependencies": {

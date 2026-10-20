@@ -1,7 +1,7 @@
 import test from "tape";
 import { draftJson2usfm } from "../../src/serialize/index.js";
 
-test("USFM Serialize: Hello world", (t) => {
+test("Serialize: Hello world", (t) => {
   t.plan(3);
   const usfm =
     "\\id GEN\n\\toc2 Genesis\n\\mt Book of Genesis\n\\c 1\n\\p\n\\v 1\nIn the beginning";

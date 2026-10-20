@@ -44,6 +44,13 @@ function processCvItems(items, os, chapterNo, newChapter) {
         content: [""],
       });
     } else if (item.type === "token") {
+      if (!ret[ret.length - 1]) {
+        ret.push({
+          chapter: chapterNo,
+          verses: "0",
+          content: [""],
+        });
+      }
       ret[ret.length - 1].content[0] += item.payload.replace(/\s+/g, " ");
       if (ret[ret.length - 1].content[0].trim() === "___") {
         ret[ret.length - 1].content[0] = "";
@@ -153,4 +160,4 @@ function parseUsfm2draftJson(usfm) {
   };
 }
 
-export {parseUsfm2draftJson};
+export { parseUsfm2draftJson };
