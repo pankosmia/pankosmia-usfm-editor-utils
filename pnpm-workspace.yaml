@@ -1,5 +1,5 @@
 allowBuilds:
-  core-js-pure: set this to true or false
+  core-js-pure: true
 supportedArchitectures:
   os:
     - win32
