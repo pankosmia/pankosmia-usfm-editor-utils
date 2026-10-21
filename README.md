@@ -1,16 +1,16 @@
-# pankosmia-usfm
+# pankosmia-usfm-editor-utils
 
-Utilities for working with USFM within the Pankosmia ecosystem.
+Utilities supporting USFM editing within the Pankosmia ecosystem.
 
 ## Installation
 
 ```bash
-pnpm add pankosmia-usfm
+pnpm add pankosmia-usfm-editor-utils
 ```
 
 ## Usage
 ```ts
-import {} from 'pankosmia-usfm'
+import {} from 'pankosmia-usfm-editor-utils'
 ```
 
 ## Testing
