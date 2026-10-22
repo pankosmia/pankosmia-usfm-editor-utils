@@ -163,7 +163,6 @@ function parseUsfm2draftJson(usfm) {
   };
 }
 
-
 ///////// parseUsfm2viewerJson /////////
 const XCONTENT_RE = /^attribute\/milestone\/zaln\/x-content\/\d+\/(.+)$/;
 
@@ -194,6 +193,13 @@ function processCvItemsViewer(items, os, chapterNo, newChapter) {
         content: [],
       });
     } else if (item.type === "token") {
+      if (!ret[ret.length - 1]) {
+        ret.push({
+          chapter: chapterNo,
+          verses: "0",
+          content: [""],
+        });
+      }
       const text = item.payload.replace(/\s+/g, " ");
       const sources = getSourcesForToken(item.scopes);
       ret[ret.length - 1].content.push({

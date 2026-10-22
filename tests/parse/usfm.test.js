@@ -1,13 +1,18 @@
 import test from "tape";
-import path from 'path';
-import fse from 'fs-extra';
-import { parseUsfm2draftJson, parseUsfm2viewerJson } from "../../src/parse/index.js";
+import path from "path";
+import fse from "fs-extra";
+import {
+  parseUsfm2draftJson,
+  parseUsfm2viewerJson,
+} from "../../src/parse/index.js";
 
 test("Parse: Hello world", (t) => {
-    t.plan(13);
+  t.plan(13);
   const usfm =
     "\\id GEN\n\\toc2 Genesis\n\\mt Book of Genesis\n\\c 1\n\\p\n\\v 1\nIn the beginning";
-    const doParse = () => {parseUsfm2draftJson(usfm)};
+  const doParse = () => {
+    parseUsfm2draftJson(usfm);
+  };
   t.doesNotThrow(doParse);
   const result = parseUsfm2draftJson(usfm);
   t.equal(typeof result, "object");
@@ -15,7 +20,7 @@ test("Parse: Hello world", (t) => {
   t.equal(result.headers.toc2, "Genesis");
   t.equal(result.blocks.length, 3);
   t.equal(result.blocks[0].type, "chapter");
-  t.equal(result.blocks[0].chapter, 1 );
+  t.equal(result.blocks[0].chapter, 1);
   t.equal(result.blocks[1].type, "title");
   t.equal(result.blocks[1].tag, "mt");
   t.equal(result.blocks[1].content[0], "Book of Genesis");
@@ -26,11 +31,16 @@ test("Parse: Hello world", (t) => {
 });
 
 test("Parse: PSA", (t) => {
-    t.plan(1);
+  t.plan(2);
   const usfm = fse.readFileSync(path.resolve("./test_data/PSA_v0.usfm"));
-    const doParse = () => {parseUsfm2draftJson(usfm)};
-  t.doesNotThrow(doParse);
-  const result = parseUsfm2draftJson(usfm);
+  const doParseEditor = () => {
+    parseUsfm2draftJson(usfm);
+  };
+  t.doesNotThrow(doParseEditor);
+  const doParseViewer = () => {
+    parseUsfm2viewerJson(usfm);
+  };
+  t.doesNotThrow(doParseViewer);
   t.end();
 });
 
@@ -53,43 +63,19 @@ test("Parse viewer: Hello world", (t) => {
   t.equal(result.headers.toc2, "Genesis", "viewer toc2 is Genesis");
   t.equal(result.blocks.length, 3, "viewer has 3 blocks");
 
-  t.equal(
-    result.blocks[0].type,
-    "chapter",
-    "viewer block 0 is chapter",
-  );
-  t.equal(
-    result.blocks[0].chapter,
-    1,
-    "viewer chapter number is 1",
-  );
+  t.equal(result.blocks[0].type, "chapter", "viewer block 0 is chapter");
+  t.equal(result.blocks[0].chapter, 1, "viewer chapter number is 1");
 
-  t.equal(
-    result.blocks[1].type,
-    "title",
-    "viewer block 1 is title",
-  );
-  t.equal(
-    result.blocks[1].tag,
-    "mt",
-    "viewer title tag is mt",
-  );
+  t.equal(result.blocks[1].type, "title", "viewer block 1 is title");
+  t.equal(result.blocks[1].tag, "mt", "viewer title tag is mt");
   t.equal(
     result.blocks[1].content[0],
     "Book of Genesis",
     "viewer title content is Book of Genesis",
   );
 
-  t.equal(
-    result.blocks[2].type,
-    "main",
-    "viewer block 2 is main",
-  );
-  t.equal(
-    result.blocks[2].tag,
-    "p",
-    "viewer main block tag is p",
-  );
+  t.equal(result.blocks[2].type, "main", "viewer block 2 is main");
+  t.equal(result.blocks[2].tag, "p", "viewer main block tag is p");
 
   t.end();
 });
